@@ -30,21 +30,20 @@ bwrap \
 	--unshare-all \
 	--share-net \
 	--die-with-parent \
-	--dev     /dev \
-	--bind    /dev/dri /dev/dri \
-	--proc    /proc \
-	--symlink /usr/bin /bin \
-	--symlink /usr/lib /lib \
-	--symlink /usr/lib64 /lib64 \
+	--proc /proc \
+	--dev-bind /dev /dev \
 	--ro-bind /run/systemd/ /run/systemd/ \
 	--ro-bind /opt /opt \
 	--ro-bind /usr /usr \
 	--ro-bind /etc /etc \
 	--ro-bind /tmp/.X11-unix /tmp/.X11-unix \
 	--ro-bind $XAUTHORITY $XAUTHORITY \
-	--bind    $SPACE/home/$SPACE_NAME /home/$USERNAME \
-	--bind    $XDG_RUNTIME_DIR/bus $XDG_RUNTIME_DIR/bus \
-	--bind    $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY \
-	--bind    $XDG_RUNTIME_DIR/pulse $XDG_RUNTIME_DIR/pulse \
-	--bind    $XDG_RUNTIME_DIR/pipewire-0 $XDG_RUNTIME_DIR/pipewire-0 \
+	--bind $SPACE/home/$SPACE_NAME /home/$USERNAME \
+	--bind $XDG_RUNTIME_DIR/bus $XDG_RUNTIME_DIR/bus \
+	--bind $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY \
+	--bind $XDG_RUNTIME_DIR/pulse $XDG_RUNTIME_DIR/pulse \
+	--bind $XDG_RUNTIME_DIR/pipewire-0 $XDG_RUNTIME_DIR/pipewire-0 \
+	--symlink /usr/bin /bin \
+	--symlink /usr/lib /lib \
+	--symlink /usr/lib64 /lib64 \
 	$COMMAND
