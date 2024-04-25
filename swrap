@@ -10,9 +10,9 @@ then
 	exit 1
 fi
 
-if [ -z $2 ]
+if [ -z $1 ]
 then
-	echo "Usage: $0 space-name command ..."
+	echo "Usage: $0 space-name [command] [option] ..."
 	exit 1
 fi
 
@@ -20,6 +20,11 @@ SPACE_NAME="$1"
 COMMAND="${@:2}"
 
 export PS1="\[\e[${PROMPT_COLOR:-33}m\]\u@$SPACE_NAME\[\e[0m\]:\[\e[${PROMPT_COLOR:-36}m\]\w\[\e[0;31m\]${?#0}\[\e[0m\]\$ "
+
+if [ -z $2 ]
+then
+	export COMMAND=bash
+fi
 
 bwrap \
 	--unshare-all \
@@ -40,4 +45,6 @@ bwrap \
 	--bind    $SPACE/home/$SPACE_NAME /home/$USERNAME \
 	--bind    $XDG_RUNTIME_DIR/bus $XDG_RUNTIME_DIR/bus \
 	--bind    $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY \
+	--bind    $XDG_RUNTIME_DIR/pulse $XDG_RUNTIME_DIR/pulse \
+	--bind    $XDG_RUNTIME_DIR/pipewire-0 $XDG_RUNTIME_DIR/pipewire-0 \
 	$COMMAND
