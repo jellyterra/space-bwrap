@@ -27,8 +27,10 @@ then
 fi
 
 bwrap \
-	--unshare-all \
-	--share-net \
+	--unshare-pid \
+	--unshare-uts \
+	--unshare-user \
+	--unshare-cgroup \
 	--die-with-parent \
 	--proc /proc \
 	--dev-bind /dev /dev \
@@ -40,9 +42,9 @@ bwrap \
 	--ro-bind $XAUTHORITY $XAUTHORITY \
 	--bind $SPACE/home/$SPACE_NAME /home/$USERNAME \
 	--bind $XDG_RUNTIME_DIR/bus $XDG_RUNTIME_DIR/bus \
-	--bind $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY \
 	--bind $XDG_RUNTIME_DIR/pulse $XDG_RUNTIME_DIR/pulse \
 	--bind $XDG_RUNTIME_DIR/pipewire-0 $XDG_RUNTIME_DIR/pipewire-0 \
+	--bind $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY \
 	--symlink /usr/bin /bin \
 	--symlink /usr/lib /lib \
 	--symlink /usr/lib64 /lib64 \
