@@ -27,9 +27,9 @@ then
 fi
 
 bwrap \
+	--unshare-user \
 	--unshare-pid \
 	--unshare-uts \
-	--unshare-user \
 	--unshare-cgroup \
 	--die-with-parent \
 	--proc /proc \
@@ -38,9 +38,11 @@ bwrap \
 	--ro-bind /opt /opt \
 	--ro-bind /usr /usr \
 	--ro-bind /etc /etc \
+	--ro-bind /sys /sys \
 	--ro-bind /tmp/.X11-unix /tmp/.X11-unix \
 	--ro-bind $XAUTHORITY $XAUTHORITY \
 	--bind $SPACE/home/$SPACE_NAME /home/$USERNAME \
+	--bind $SPACE/home/$SPACE_NAME $SPACE/home/$SPACE_NAME \
 	--bind $XDG_RUNTIME_DIR/bus $XDG_RUNTIME_DIR/bus \
 	--bind $XDG_RUNTIME_DIR/pulse $XDG_RUNTIME_DIR/pulse \
 	--bind $XDG_RUNTIME_DIR/pipewire-0 $XDG_RUNTIME_DIR/pipewire-0 \
